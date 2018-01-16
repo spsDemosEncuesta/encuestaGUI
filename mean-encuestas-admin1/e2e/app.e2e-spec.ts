@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('mean-encuestas-angular App', () => {
+describe('mean-encuestas-admin App', () => {
   let page: AppPage;
 
   beforeEach(() => {
