@@ -1,0 +1,24 @@
+{
+    "name": "MEAN Admin RedPhone",
+    "description": "Admin RedPhone app using MEAN",
+    "keywords": [
+        "MEAN",
+        "Angular",
+        "Node",
+        "FireBase",
+        "Postgress",
+        "mLab"
+    ],
+    "repository": "https://github.com/spsolutionsmexico/adminredphone",
+    "success_url": "/",
+    "formation": {
+        "web": {
+            "quantity": 1,
+            "size": "free"
+        }
+    },
+    "addons": [
+        "postgress",
+        "FireBase"
+    ]
+}
