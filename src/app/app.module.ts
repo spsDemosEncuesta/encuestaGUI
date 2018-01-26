@@ -8,9 +8,9 @@ import { ActualizarCompComponent } from './actualizar/actualizar-comp/actualizar
 import { RetosCompComponent } from './retos/retos-comp/retos-comp.component';
 import { RetoDetalleComponent } from './retos/reto-detalle/reto-detalle.component';
 import { RetosPreguntaComponent } from './retos/retos-pregunta/retos-pregunta.component';
-import { HeaderComponent } from './header/header/header.component';
+import { NavbarComponent } from './navbar/navbar.component';
 import { GraficoComponent } from './grafico/grafico.component';
-import { ProcesosComponent } from './procesos/procesos.component';
+import { AppRoutingModule } from './/app-routing.module';
 
 @NgModule({
   declarations: [
@@ -19,15 +19,15 @@ import { ProcesosComponent } from './procesos/procesos.component';
     RetosCompComponent,
     RetoDetalleComponent,
     RetosPreguntaComponent,
-    HeaderComponent,
-    GraficoComponent,
-    ProcesosComponent
+    NavbarComponent,
+    GraficoComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    ChartsModule
+    ChartsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

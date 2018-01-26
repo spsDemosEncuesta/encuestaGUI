@@ -1,15 +1,20 @@
+<h4>SINCRONIZAR INFORMACION DE REPORTES</h4>
 <hr>
-<p>
-    -----Actualizar ususrios-----
-</p>
-<button (click)="actualizar()">Actualizar Usuarios</button>
-<p>
-    -----Actualizar Reto-----
-</p>
-<form class="col-md-12">
-    <div class="form-group">
-        <label for="Reto-id">Name</label>
-        <input class="form-control" name="Reto" [(ngModel)]="idreto" placeholder="idreto" />
+<div class="row">
+    <div class="col-12">
+        <div class="form-grup">
+            <label for="Reto-id">Encuesta:</label>
+            <select class="form-curve" name="Reto" id="Reto" [(ngModel)]="idreto">
+				<option value="reto10">PRIMERA ENCUESTA FEB 2018</option>
+				<option value="reto10">SEGUNDA ENCUESTA MAR 2018</option>
+				<option value="reto10">TERCERA ENCUESTA MAY 2018</option>
+				<option value="reto10">CUARTA ENCUESTA JUN 2018</option>
+				<option value="reto10">QUINTA ENCUESTA JUL 2018</option>
+			</select>
+        </div>
+
+        <br>
+        <button class="btn btn-secondary" (click)="actualizarReto()">SINCRONIZAR</button>
     </div>
-    <button (click)="actualizarReto()">Actualizar Reto</button>
-</form>
+
+</div>

@@ -308,6 +308,86 @@ app.get("/api/preguntas/:id", function(req, res) {
 
 });
 
+
+//Consulta respuestas para graficos
+
+app.get("/api/respuestagrap/:id", function(req, res) {
+
+    console.log('Consulta sql');
+    var idpreguntaai = req.params.id.toLowerCase();
+    console.log('-- idpreguntaai: ', idpreguntaai);
+
+    var textqry = 'SELECT distinct respuesta.respuesta, idpreguntaai, COUNT( * ) as rep FROM respuesta where idreto = \'reto10\' and idpreguntaai=\'' + idpreguntaai + '\' GROUP BY idpreguntaai , respuesta.respuesta, idpreguntaai HAVING count(*) > 0  order by idpreguntaai';
+    var lib = new condblib.condblib();
+    lib.obtenerdata(textqry, function(textqry, resDB) {
+        console.log('res obtenerdata: ', JSON.stringify(resDB));
+        let queryDB = resDB;
+        //return data base query 
+        res.status(200).json(queryDB);
+    });
+
+});
+
+
+function obtenerFormatoRespuesta(arrIdPreguntaAI, queryDB) {
+    console.log('obtenerFormatoRespuesta');
+    console.log('arrIdPreguntaAI:', arrIdPreguntaAI);
+    console.log('queryDB: ', queryDB);
+    var resPreguntas = '[';
+    var i = 0;
+    console.log('arrIdPreguntaAI.length: ', arrIdPreguntaAI.length);
+    for (var contP = 0; contP < arrIdPreguntaAI.length; contP++) {
+        var idpreguntaai = arrIdPreguntaAI[contP];
+        console.log('idpreguntaai: ' + idpreguntaai);
+        resPreguntas = resPreguntas + '{idpreguntaai:' + idpreguntaai + '' + ',respuestas:{';
+        console.log(resPreguntas);
+        var labeResp = [];
+        var cantidadR = [];
+        queryDB.forEach(function(row) {
+            if (row.idpreguntaai === arrIdPreguntaAI[contP]) {
+                console.log('row.respuesta: ', row.respuesta);
+                console.log('row.rep: ', row.rep);
+                labeResp.push(row.respuesta);
+                cantidadR.push(row.rep);
+            }
+        });
+        console.log('labeResp: ', labeResp);
+        console.log('cantidadR: ', cantidadR);
+        resPreguntas = resPreguntas + 'respuesta:' + labeResp + ',';
+        resPreguntas = resPreguntas + 'rep:' + cantidadR;
+
+        if (i === arrIdPreguntaAI.length - 1) {
+            resPreguntas = resPreguntas + '}}';
+
+        } else {
+            resPreguntas = resPreguntas + '}},';
+        }
+
+
+        i++;
+    }
+
+    resPreguntas = resPreguntas + ']';
+
+    return resPreguntas;
+}
+
+function eliminateDuplicates(arr) {
+    var i,
+        len = arr.length,
+        out = [],
+        obj = {};
+
+    for (i = 0; i < len; i++) {
+        obj[arr[i]] = 0;
+    }
+    for (i in obj) {
+        out.push(i);
+    }
+    return out;
+}
+
+
 // Generic error handler used by all endpoints.
 function handleError(res, reason, message, code) {
     console.log("ERROR: " + reason);
